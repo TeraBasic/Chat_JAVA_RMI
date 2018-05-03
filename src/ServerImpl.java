@@ -45,13 +45,13 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 	@Override
 	public void addClient(Client c, String msg) throws RemoteException {
 		// TODO Auto-generated method stub
-		if(!users.contains(c))
-	    {
-	      for(int i=0;i<users.size();i++)
-	      {
-	        sendMessage((Client)users.get(i),msg);
+		if(!users.contains(c)){
+			users.add(c);
+			for(int i=0;i<users.size();i++) {	      
+	        //sendMessage((Client)users.get(i),msg);
+				System.out.println(users.get(i).getName());
 	      }
-	      users.add(c);
+	      //users.add(c);
 	    }
 	}
 
@@ -63,14 +63,14 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 		      for(int i=0;i<users.size();i++)
 		      {
 		        //sendMessage((IChatClient)clients.elementAt(i),msg);
-		        ( (Client) users.get(i)).sendMessage(msg);
+		        ( (Client) users.get(i)).afficherMessage(msg);
 		      }
 		      users.remove(c);
 		    }
 	}
 
 	@Override
-	public void sendMessage(Client cm, String msg) throws RemoteException {
+	public void sendMessageGroup(Client cm, String msg) throws RemoteException {
 		// TODO Auto-generated method stub
 		if(!users.contains(cm)) {
 			users.add(cm); 
@@ -81,12 +81,13 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 		
 			// 回调远程客户端方法
 			String user=cm.getName(); 
-		      if(user==null || user=="")
-		        user = "anonymous";
-		      c.sendMessage(user + " : " + msg);
-		      //c.showDialog(msg);
+	      if(user==null || user=="") {
+	    	  user = "anonymous";
+	      }	        
+	      c.afficherMessage(user + " : " + msg);
+	      //c.showDialog(msg);
 			}
-	} catch (RemoteException ex) {
+		} catch (RemoteException ex) {
 			users.remove(cm);
 			ex.printStackTrace();
 		}
@@ -99,5 +100,31 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 		      ( (Client) users.get(i)).sendMessage(user + " : " + msg);
 		    }*/
   }
+
+	@Override
+	public void sendMessageSeul(Client cm, String Nomclient, String msg) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(!users.contains(cm)) {
+			users.add(cm); 
+			} 			
+		//envoyes les message vers un utilisateur
+		try {
+			for (Client c : users) {
+		
+			  // 回调远程客户端方法
+			  String user=cm.getName(); 
+		      if(user==null || user=="") {
+		    	  user = "anonymous";
+		      }	 
+		      if (c.getName().equals(Nomclient)) {
+		    	  c.afficherMessage(user + " : " + msg);
+		      }		      
+		      //c.showDialog(msg);
+			}
+		} catch (RemoteException ex) {
+			users.remove(cm);
+			ex.printStackTrace();
+		}
+	}
 	
 }

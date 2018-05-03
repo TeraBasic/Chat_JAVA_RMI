@@ -14,5 +14,5 @@ public interface Client extends Remote
 	/**
 	 * sent message
 	 */
-	public void sendMessage(String msg) throws RemoteException;
+	public void afficherMessage(String msg) throws RemoteException;
 }

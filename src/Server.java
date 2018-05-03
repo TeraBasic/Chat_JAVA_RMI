@@ -8,7 +8,8 @@ public interface Server extends Remote {
 	
 	public void removeClient(Client c,String msg) throws RemoteException;
 	
-	public void sendMessage(Client c,String msg) throws RemoteException;
-
+	public void sendMessageGroup(Client c,String msg) throws RemoteException;
+	
+	public void sendMessageSeul(Client c, String client, String msg) throws RemoteException;
 
 }
