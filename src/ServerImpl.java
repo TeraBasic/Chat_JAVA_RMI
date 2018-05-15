@@ -119,7 +119,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 		      if (c.getName().equals(Nomclient)) {
 		    	  c.afficherMessage(user + " : " + msg);
 		      }		      
-		      //c.showDialog(msg);
+		      //c.showDialog(msg); he colll
 			}
 		} catch (RemoteException ex) {
 			users.remove(cm);
