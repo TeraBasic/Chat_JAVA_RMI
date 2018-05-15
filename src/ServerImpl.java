@@ -126,5 +126,5 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 			ex.printStackTrace();
 		}
 	}
-	
+		
 }
