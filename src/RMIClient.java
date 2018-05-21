@@ -23,7 +23,7 @@ public class RMIClient implements Client {
 	  private static String user = "Yi";
 	  private static String  code;
 	  boolean connected=false;
-	  static boolean estClient = true;
+	  static boolean estClient;
 	  private boolean isStandalone = false;
 	public static void main(String[] args) throws Exception {
 		if (estClient){
